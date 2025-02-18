@@ -1,69 +1,52 @@
-# Welcome to your Lovable project
+# Prime9 Realty Landing Hub
 
-## Project info
+A modern real estate landing page built with React, Vite, and Tailwind CSS.
 
-**URL**: https://lovable.dev/projects/5d05e211-c5dc-472a-87f9-9b4bd2684d44
+## 🚀 Tech Stack
 
-## How can I edit this code?
+- **React** - Frontend library
+- **Vite** - Build tool and development server
+- **Tailwind CSS** - Utility-first CSS framework
+- **W3mail** - Email service integration
 
-There are several ways of editing your application.
+## 🛠️ Installation
 
-**Use Lovable**
-
-Simply visit the [Lovable Project](https://lovable.dev/projects/5d05e211-c5dc-472a-87f9-9b4bd2684d44) and start prompting.
-
-Changes made via Lovable will be committed automatically to this repo.
-
-**Use your preferred IDE**
-
-If you want to work locally using your own IDE, you can clone this repo and push changes. Pushed changes will also be reflected in Lovable.
-
-The only requirement is having Node.js & npm installed - [install with nvm](https://github.com/nvm-sh/nvm#installing-and-updating)
-
-Follow these steps:
-
-```sh
-# Step 1: Clone the repository using the project's Git URL.
-git clone <YOUR_GIT_URL>
-
-# Step 2: Navigate to the project directory.
-cd <YOUR_PROJECT_NAME>
-
-# Step 3: Install the necessary dependencies.
-npm i
-
-# Step 4: Start the development server with auto-reloading and an instant preview.
-npm run dev
+1. Clone the repository:
 ```
 
-**Edit a file directly in GitHub**
+## 🌟 Features
 
-- Navigate to the desired file(s).
-- Click the "Edit" button (pencil icon) at the top right of the file view.
-- Make your changes and commit the changes.
+- Responsive design for all device sizes
+- Modern UI/UX with smooth animations
+- Real estate property showcase
+- Contact form with email integration
+- 24/7 support information
+- Location maps integration
 
-**Use GitHub Codespaces**
+## 📞 Contact Information
 
-- Navigate to the main page of your repository.
-- Click on the "Code" button (green button) near the top right.
-- Select the "Codespaces" tab.
-- Click on "New codespace" to launch a new Codespace environment.
-- Edit files directly within the Codespace and commit and push your changes once you're done.
+- **Address:** Downtown, City Vista, Fountain Road, Rakshak Nagar, Kharadi, Pune 411014
+- **Phone:** +91 7666248250
+- **Email:** info@prime9realty.com
+- **Hours:** Open 24/7
 
-## What technologies are used for this project?
+## 🤝 Contributing
 
-This project is built with .
+1. Fork the repository
+2. Create your feature branch (`git checkout -b feature/AmazingFeature`)
+3. Commit your changes (`git commit -m 'Add some AmazingFeature'`)
+4. Push to the branch (`git push origin feature/AmazingFeature`)
+5. Open a Pull Request
 
-- Vite
-- TypeScript
-- React
-- shadcn-ui
-- Tailwind CSS
+## 📝 License
 
-## How can I deploy this project?
+This project is licensed under the MIT License - see the [LICENSE.md](LICENSE.md) file for details.
 
-Simply open [Lovable](https://lovable.dev/projects/5d05e211-c5dc-472a-87f9-9b4bd2684d44) and click on Share -> Publish.
+## 👥 Authors
 
-## I want to use a custom domain - is that possible?
+- Prime9 Realty Team
 
-We don't support custom domains (yet). If you want to deploy your project under your own domain then we recommend using Netlify. Visit our docs for more details: [Custom domains](https://docs.lovable.dev/tips-tricks/custom-domain/)
+## 🙏 Acknowledgments
+
+- All the contributors who have helped with code, bug reports, and suggestions
+- The amazing open-source community
