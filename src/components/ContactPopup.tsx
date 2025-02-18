@@ -72,35 +72,35 @@ const ContactPopup = () => {
   if (!isOpen) return null;
 
   return (
-    <div className="fixed inset-0 bg-black/50 backdrop-blur-sm z-[100] flex items-center justify-center p-4 sm:p-4 animate-fade-in">
-      <div className="bg-white rounded-lg shadow-2xl w-full max-w-[400px] p-3 sm:p-5 relative animate-slide-up mx-auto">
+    <div className="fixed inset-0 bg-black/50 backdrop-blur-sm z-[100] flex items-center justify-center p-4 animate-fade-in">
+      <div className="bg-white rounded-xl shadow-2xl w-full max-w-[350px] p-6 relative animate-slide-up mx-auto">
         <button 
           onClick={() => setIsOpen(false)}
-          className="absolute top-2 sm:top-3 right-2 sm:right-3 text-gray-400 hover:text-gray-600 transition-colors duration-200"
+          className="absolute top-3 right-3 text-gray-400 hover:text-gray-600 transition-colors duration-200"
         >
           ✕
         </button>
         
-        <form onSubmit={onSubmit} className="space-y-3 sm:space-y-4">
-          <div className="text-center mb-3 sm:mb-4">
-            <div className="flex items-center justify-center mb-2">
-              <div className="bg-primary/10 p-1.5 sm:p-2 rounded-full">
-                <Mail className="w-4 h-4 sm:w-5 sm:h-5 text-primary" />
+        <form onSubmit={onSubmit} className="space-y-4">
+          <div className="text-center mb-6">
+            <div className="flex items-center justify-center mb-3">
+              <div className="bg-primary/10 p-3 rounded-full">
+                <Mail className="w-6 h-6 text-primary" />
               </div>
             </div>
-            <h3 className="text-base sm:text-lg font-semibold text-gray-900">
-              Stay Connected
+            <h3 className="text-xl font-semibold text-gray-900">
+              Get in Touch
             </h3>
-            <p className="text-xs sm:text-sm text-gray-500 mt-1">
-              Get updates about new properties
+            <p className="text-sm text-gray-500 mt-1">
+              We'll get back to you shortly
             </p>
           </div>
 
-          <div className="space-y-2 sm:space-y-3">
+          <div className="space-y-4">
             <div className="group">
               <label
                 htmlFor="popup-name"
-                className="block text-xs sm:text-sm font-medium text-gray-700 mb-1"
+                className="block text-sm font-medium text-gray-700 mb-1"
               >
                 Name
               </label>
@@ -109,15 +109,15 @@ const ContactPopup = () => {
                 name="name"
                 id="popup-name"
                 required
-                placeholder="Your name"
-                className="w-full px-2.5 sm:px-3 py-1.5 sm:py-2 text-xs sm:text-sm border border-gray-300 rounded-md focus:ring-1 focus:ring-primary/20 focus:border-primary transition-all duration-200"
+                placeholder="Enter your name"
+                className="w-full px-4 py-2.5 text-sm border border-gray-300 rounded-lg focus:ring-2 focus:ring-primary/30 focus:border-primary transition-all duration-200 hover:border-gray-400"
               />
             </div>
 
             <div className="group">
               <label
                 htmlFor="popup-phone"
-                className="block text-xs sm:text-sm font-medium text-gray-700 mb-1"
+                className="block text-sm font-medium text-gray-700 mb-1"
               >
                 Phone Number
               </label>
@@ -126,55 +126,17 @@ const ContactPopup = () => {
                 name="phone"
                 id="popup-phone"
                 required
-                placeholder="Your phone number"
+                placeholder="Enter your phone number"
                 pattern="[0-9]{10}"
-                className="w-full px-2.5 sm:px-3 py-1.5 sm:py-2 text-xs sm:text-sm border border-gray-300 rounded-md focus:ring-1 focus:ring-primary/20 focus:border-primary transition-all duration-200"
+                className="w-full px-4 py-2.5 text-sm border border-gray-300 rounded-lg focus:ring-2 focus:ring-primary/30 focus:border-primary transition-all duration-200 hover:border-gray-400"
               />
-            </div>
-
-            <div className="group">
-              <label
-                htmlFor="popup-email"
-                className="block text-xs sm:text-sm font-medium text-gray-700 mb-1"
-              >
-                Email
-              </label>
-              <input
-                type="email"
-                name="email"
-                id="popup-email"
-                required
-                placeholder="Your email"
-                className="w-full px-2.5 sm:px-3 py-1.5 sm:py-2 text-xs sm:text-sm border border-gray-300 rounded-md focus:ring-1 focus:ring-primary/20 focus:border-primary transition-all duration-200"
-              />
-            </div>
-
-            <div className="group">
-              <label
-                htmlFor="popup-subject"
-                className="block text-xs sm:text-sm font-medium text-gray-700 mb-1"
-              >
-                Subject
-              </label>
-              <select
-                name="subject"
-                id="popup-subject"
-                required
-                className="w-full px-2.5 sm:px-3 py-1.5 sm:py-2 text-xs sm:text-sm border border-gray-300 rounded-md focus:ring-1 focus:ring-primary/20 focus:border-primary transition-all duration-200"
-              >
-                <option value="">Select a subject</option>
-                <option value="Property Inquiry">Property Inquiry</option>
-                <option value="Price Quote">Price Quote</option>
-                <option value="General Question">General Question</option>
-                <option value="Other">Other</option>
-              </select>
             </div>
           </div>
 
           <button
             type="submit"
             disabled={isSubmitting}
-            className="w-full bg-primary hover:bg-primary/90 text-white text-xs sm:text-sm font-medium py-2 sm:py-2.5 rounded-md transition-all duration-200 disabled:opacity-70 mt-2"
+            className="w-full bg-primary hover:bg-primary/90 text-white font-medium py-2.5 rounded-lg transition-all duration-200 disabled:opacity-70 mt-4 text-sm hover:shadow-lg"
           >
             {isSubmitting ? (
               <div className="flex items-center justify-center">
@@ -185,7 +147,7 @@ const ContactPopup = () => {
                 Sending...
               </div>
             ) : (
-              'Send Message'
+              'Submit'
             )}
           </button>
         </form>
