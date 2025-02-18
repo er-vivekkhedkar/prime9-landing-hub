@@ -3,8 +3,8 @@ import { FaWhatsapp } from "react-icons/fa";
 
 const FloatingContact = () => {
   // Replace these with your actual contact details
-  const whatsappNumber = "+1234567890";
-  const phoneNumber = "+1234567890";
+  const whatsappNumber = "+91 8380859909";
+  const phoneNumber = "+91 8380859909";
 
   return (
     <div className="fixed bottom-6 right-6 flex flex-col gap-4 z-50">
