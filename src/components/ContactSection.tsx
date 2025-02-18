@@ -11,44 +11,44 @@ const ContactSection = () => {
             <h2 className="text-3xl md:text-4xl font-bold text-gray-900 mb-4">
               Get in Touch
             </h2>
-            <p className="text-gray-600">
+            <p className="text-gray-600 mb-8">
               We're here to help you find your perfect property
             </p>
           </div>
           <div className="grid md:grid-cols-2 gap-8">
-            <div className="space-y-8">
+            <div className="space-y-8 text-center md:text-left">
               <div>
-                <h3 className="text-xl font-bold text-gray-900 mb-2">
+                <h3 className="text-xl font-bold text-gray-900 mb-4">
                   Office Location
                 </h3>
                 <p className="text-gray-600">
-                  123 Business Avenue
+                  Downtown, City Vista
                   <br />
-                  Suite 100
+                  Fountain Road, Rakshak Nagar
                   <br />
-                  Los Angeles, CA 90012
+                  Kharadi, Pune 411014
                 </p>
               </div>
               <div>
-                <h3 className="text-xl font-bold text-gray-900 mb-2">
+                <h3 className="text-xl font-bold text-gray-900 mb-4">
                   Contact Info
                 </h3>
                 <p className="text-gray-600">
-                  Phone: (555) 123-4567
+                  Phone: +91 (020) 1234-5678
+                  <br />
+                  Mobile: +91 98765 43210
                   <br />
                   Email: info@prime9realty.com
                 </p>
               </div>
               <div>
-                <h3 className="text-xl font-bold text-gray-900 mb-2">
+                <h3 className="text-xl font-bold text-gray-900 mb-4">
                   Business Hours
                 </h3>
                 <p className="text-gray-600">
-                  Monday - Friday: 9:00 AM - 6:00 PM
+                  Open 24/7
                   <br />
-                  Saturday: 10:00 AM - 4:00 PM
-                  <br />
-                  Sunday: Closed
+                  Always here to serve you
                 </p>
               </div>
             </div>

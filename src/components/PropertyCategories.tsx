@@ -34,23 +34,23 @@ const PropertyCategories = () => {
             Browse by Category
           </h2>
         </div>
-        <div className="grid md:grid-cols-3 gap-8">
+        <div className="flex flex-nowrap md:grid md:grid-cols-3 gap-4 md:gap-8 overflow-x-auto pb-4 md:pb-0">
           {categories.map((category) => (
             <Link
               key={category.title}
               to={category.link}
-              className="group relative overflow-hidden rounded-xl aspect-[4/3] hover:shadow-xl transition-shadow duration-300"
+              className="flex-none w-[280px] md:w-auto group relative overflow-hidden rounded-xl aspect-[4/3] hover:shadow-xl transition-shadow duration-300"
             >
               <img
                 src={category.image}
                 alt={category.title}
                 className="w-full h-full object-cover transition-transform duration-300 group-hover:scale-110"
               />
-              <div className="absolute inset-0 bg-gradient-to-t from-black/80 to-black/20 p-6 flex flex-col justify-end">
-                <h3 className="text-2xl font-bold text-white mb-2">
+              <div className="absolute inset-0 bg-gradient-to-t from-black/80 to-black/20 p-4 md:p-6 flex flex-col justify-end">
+                <h3 className="text-xl md:text-2xl font-bold text-white mb-1 md:mb-2">
                   {category.title}
                 </h3>
-                <p className="text-white/90">{category.description}</p>
+                <p className="text-white/90 text-sm md:text-base">{category.description}</p>
               </div>
             </Link>
           ))}

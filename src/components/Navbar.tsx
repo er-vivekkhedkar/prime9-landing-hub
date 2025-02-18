@@ -24,15 +24,6 @@ const Navbar = () => {
             <img src="/lovable-uploads/19fa9b68-7bb1-4de1-b440-d1e0ab5af13e.png" alt="Prime9 Realty" className="h-12" />
           </Link>
 
-          {/* Mobile Phone Number */}
-          <a 
-            href="tel:+919876543210" 
-            className="md:hidden flex items-center text-primary font-medium"
-          >
-            <Phone className="h-5 w-5 mr-2" />
-            +91 98765 43210
-          </a>
-
           {/* Desktop Navigation */}
           <div className="hidden md:flex items-center space-x-8">
             {navItems.map((item) => (
@@ -134,6 +125,13 @@ const Navbar = () => {
               </Link>
             </div>
           )}
+          <a 
+            href="tel:+919876543210" 
+            className="px-6 py-3 text-primary font-medium flex items-center"
+          >
+            <Phone className="h-5 w-5 mr-2" />
+            +91 98765 43210
+          </a>
         </div>
       </div>
     </nav>
