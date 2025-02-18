@@ -45,6 +45,12 @@ const Navbar = () => {
               </button>
               <div className="absolute top-full right-0 w-48 bg-white shadow-lg rounded-md overflow-hidden opacity-0 group-hover:opacity-100 transition-opacity duration-200">
                 <Link
+                  to="/properties/residential"
+                  className="block px-4 py-2 text-gray-700 hover:bg-primary hover:text-white transition-colors duration-200"
+                >
+                  Residential
+                </Link>
+                <Link
                   to="/properties/commercial"
                   className="block px-4 py-2 text-gray-700 hover:bg-primary hover:text-white transition-colors duration-200"
                 >
@@ -96,6 +102,13 @@ const Navbar = () => {
           </button>
           {isPropertiesOpen && (
             <div className="bg-gray-50">
+              <Link
+                to="/properties/residential"
+                className="block px-8 py-3 text-gray-700 hover:bg-primary hover:text-white transition-colors duration-200"
+                onClick={toggleMenu}
+              >
+                Residential
+              </Link>
               <Link
                 to="/properties/commercial"
                 className="block px-8 py-3 text-gray-700 hover:bg-primary hover:text-white transition-colors duration-200"

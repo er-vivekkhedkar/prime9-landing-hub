@@ -26,6 +26,28 @@ const propertyTypes = {
       },
     ],
   },
+  residential: {
+    title: "Residential Properties",
+    description: "Find your dream home in prime locations",
+    properties: [
+      {
+        id: 1,
+        title: "Luxury Villa",
+        image: "https://images.unsplash.com/photo-1460574283810-2aab119d8511",
+        price: "$3,200,000",
+        location: "Beverly Hills",
+        area: "4,500 sqft",
+      },
+      {
+        id: 2,
+        title: "Modern Apartment",
+        image: "https://images.unsplash.com/photo-1721322800607-8c38375eef04",
+        price: "$850,000",
+        location: "Santa Monica",
+        area: "1,800 sqft",
+      },
+    ],
+  },
   land: {
     title: "Land Properties",
     description: "Premium land opportunities for development",
