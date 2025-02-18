@@ -74,14 +74,14 @@ const ProjectSlider = () => {
                   <img
                     src={project.image}
                     alt={project.title}
-                    className="w-full h-[600px] object-cover"
+                    className="w-full h-[400px] md:h-[500px] object-cover"
                   />
-                  <div className="absolute bottom-0 left-0 right-0 bg-gradient-to-t from-black/90 via-black/50 to-transparent p-8">
+                  <div className="absolute bottom-0 left-0 right-0 bg-gradient-to-t from-black/90 via-black/50 to-transparent p-6 md:p-8">
                     <div className="max-w-3xl mx-auto text-center">
-                      <h3 className="text-3xl font-bold text-white mb-3">
+                      <h3 className="text-2xl md:text-3xl font-bold text-white mb-2 md:mb-3">
                         {project.title}
                       </h3>
-                      <p className="text-white/90 text-lg mb-2">
+                      <p className="text-white/90 text-base md:text-lg mb-2">
                         {project.description}
                       </p>
                       <span className="inline-block bg-primary/90 text-white px-4 py-2 rounded-full text-sm font-medium">
