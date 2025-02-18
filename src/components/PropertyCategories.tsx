@@ -1,5 +1,7 @@
 import { Link, useNavigate } from "react-router-dom";
 import { ArrowRight } from "lucide-react";
+import { motion } from "framer-motion";
+import { fadeIn, staggerContainer, scaleIn } from "./shared/animations";
 
 const categories = [
   {
@@ -41,8 +43,14 @@ const PropertyCategories = () => {
 
   return (
     <section id="property-categories" className="py-12 sm:py-20 bg-gray-50">
-      <div className="container mx-auto px-4">
-        <div className="text-center mb-10 sm:mb-16">
+      <motion.div
+        variants={staggerContainer}
+        initial="hidden"
+        whileInView="visible"
+        viewport={{ once: true, margin: "-100px" }}
+        className="container mx-auto px-4"
+      >
+        <motion.div variants={fadeIn} className="text-center mb-10">
           <span className="inline-block px-3 py-1 bg-primary text-white text-xs sm:text-sm font-medium rounded-full mb-3">
             Explore Properties
           </span>
@@ -52,14 +60,15 @@ const PropertyCategories = () => {
           <p className="text-gray-600 text-sm sm:text-base max-w-2xl mx-auto">
             Discover your perfect property across our diverse range of categories
           </p>
-        </div>
+        </motion.div>
 
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 sm:gap-8 max-w-6xl mx-auto">
-          {categories.map((category) => (
-            <div
+        <motion.div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
+          {categories.map((category, index) => (
+            <motion.div
               key={category.title}
-              className="group relative bg-white rounded-2xl shadow-md hover:shadow-xl transition-all duration-300 overflow-hidden cursor-pointer"
-              onClick={() => handleNavigation(category.path)}
+              variants={scaleIn}
+              whileHover={{ scale: 1.02 }}
+              className="group relative bg-white rounded-2xl shadow-md"
             >
               {/* Image Container */}
               <div className="aspect-[4/3] overflow-hidden">
@@ -104,10 +113,10 @@ const PropertyCategories = () => {
 
               {/* Hover Overlay */}
               <div className="absolute inset-0 bg-primary/10 opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
-            </div>
+            </motion.div>
           ))}
-        </div>
-      </div>
+        </motion.div>
+      </motion.div>
     </section>
   );
 };

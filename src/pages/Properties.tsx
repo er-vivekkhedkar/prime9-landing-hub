@@ -289,93 +289,97 @@ const Properties = () => {
       {/* Property Modal */}
       {selectedProperty && (
         <div className="fixed inset-0 bg-black bg-opacity-50 z-50 flex items-center justify-center p-4">
-          <div className="bg-white rounded-xl max-w-4xl w-full max-h-[90vh] overflow-y-auto">
-            <div className="relative">
-              <button
-                onClick={() => setSelectedProperty(null)}
-                className="absolute right-4 top-4 z-10 bg-white rounded-full p-2 shadow-lg hover:bg-gray-100"
-              >
-                <svg xmlns="http://www.w3.org/2000/svg" className="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M6 18L18 6M6 6l12 12" />
-                </svg>
-              </button>
-              <img
-                src={selectedProperty.image}
-                alt={selectedProperty.title}
-                className="w-full h-72 object-cover rounded-t-xl"
-              />
-            </div>
-            
-            <div className="p-6 space-y-6">
-              <div>
-                <h2 className="text-2xl font-bold text-gray-900">{selectedProperty.title}</h2>
-                <p className="text-gray-600 mt-2">{selectedProperty.location}</p>
-              </div>
-
-              <div className="flex justify-between items-center">
-                <span className="text-primary text-2xl font-bold">{selectedProperty.price}</span>
-                <span className="text-gray-600">{selectedProperty.area}</span>
-              </div>
-
-              <div>
-                <h3 className="text-xl font-semibold mb-3">Description</h3>
-                <p className="text-gray-600">{selectedProperty.description}</p>
-              </div>
-
-              {selectedProperty.specifications && (
-                <div>
-                  <h3 className="text-xl font-semibold mb-3">Specifications</h3>
-                  <div className="grid grid-cols-2 md:grid-cols-3 gap-4">
-                    {Object.entries(selectedProperty.specifications).map(([key, value]) => (
-                      <div key={key} className="bg-gray-50 p-3 rounded-lg">
-                        <span className="text-gray-600 capitalize">{key}:</span>
-                        <span className="font-medium ml-2">{value}</span>
-                      </div>
-                    ))}
-                  </div>
-                </div>
-              )}
-
-              {selectedProperty.amenities && (
-                <div>
-                  <h3 className="text-xl font-semibold mb-3">Amenities</h3>
-                  <div className="grid grid-cols-2 md:grid-cols-3 gap-2">
-                    {selectedProperty.amenities.map((amenity, index) => (
-                      <div key={index} className="flex items-center gap-2">
-                        <svg className="w-5 h-5 text-primary" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M5 13l4 4L19 7" />
-                        </svg>
-                        <span>{amenity}</span>
-                      </div>
-                    ))}
-                  </div>
-                </div>
-              )}
-
-              {selectedProperty.highlights && (
-                <div>
-                  <h3 className="text-xl font-semibold mb-3">Highlights</h3>
-                  <div className="grid grid-cols-1 md:grid-cols-2 gap-2">
-                    {selectedProperty.highlights.map((highlight, index) => (
-                      <div key={index} className="flex items-center gap-2">
-                        <svg className="w-5 h-5 text-primary" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M5 13l4 4L19 7" />
-                        </svg>
-                        <span>{highlight}</span>
-                      </div>
-                    ))}
-                  </div>
-                </div>
-              )}
-
-              <div className="pt-4 border-t">
-                <button 
-                  onClick={() => handleContactAgent(selectedProperty)}
-                  className="w-full bg-primary hover:bg-primary/90 text-white font-medium py-3 rounded-lg transition-colors duration-200"
+          <div className="bg-white rounded-xl max-w-4xl w-full h-[90vh] flex flex-col">
+            {/* Scrollable Content Area */}
+            <div className="overflow-y-auto flex-1">
+              <div className="relative">
+                <button
+                  onClick={() => setSelectedProperty(null)}
+                  className="absolute right-4 top-4 z-10 bg-white rounded-full p-2 shadow-lg hover:bg-gray-100"
                 >
-                  Contact Agent
+                  <svg xmlns="http://www.w3.org/2000/svg" className="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M6 18L18 6M6 6l12 12" />
+                  </svg>
                 </button>
+                <img
+                  src={selectedProperty.image}
+                  alt={selectedProperty.title}
+                  className="w-full h-72 object-cover"
+                />
               </div>
+              
+              <div className="p-6 space-y-6">
+                <div>
+                  <h2 className="text-2xl font-bold text-gray-900">{selectedProperty.title}</h2>
+                  <p className="text-gray-600 mt-2">{selectedProperty.location}</p>
+                </div>
+
+                <div className="flex justify-between items-center">
+                  <span className="text-primary text-2xl font-bold">{selectedProperty.price}</span>
+                  <span className="text-gray-600">{selectedProperty.area}</span>
+                </div>
+
+                <div>
+                  <h3 className="text-xl font-semibold mb-3">Description</h3>
+                  <p className="text-gray-600">{selectedProperty.description}</p>
+                </div>
+
+                {selectedProperty.specifications && (
+                  <div>
+                    <h3 className="text-xl font-semibold mb-3">Specifications</h3>
+                    <div className="grid grid-cols-2 md:grid-cols-3 gap-4">
+                      {Object.entries(selectedProperty.specifications).map(([key, value]) => (
+                        <div key={key} className="bg-gray-50 p-3 rounded-lg">
+                          <span className="text-gray-600 capitalize">{key}:</span>
+                          <span className="font-medium ml-2">{value}</span>
+                        </div>
+                      ))}
+                    </div>
+                  </div>
+                )}
+
+                {selectedProperty.amenities && (
+                  <div>
+                    <h3 className="text-xl font-semibold mb-3">Amenities</h3>
+                    <div className="grid grid-cols-2 md:grid-cols-3 gap-2">
+                      {selectedProperty.amenities.map((amenity, index) => (
+                        <div key={index} className="flex items-center gap-2">
+                          <svg className="w-5 h-5 text-primary" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M5 13l4 4L19 7" />
+                          </svg>
+                          <span>{amenity}</span>
+                        </div>
+                      ))}
+                    </div>
+                  </div>
+                )}
+
+                {selectedProperty.highlights && (
+                  <div>
+                    <h3 className="text-xl font-semibold mb-3">Highlights</h3>
+                    <div className="grid grid-cols-1 md:grid-cols-2 gap-2">
+                      {selectedProperty.highlights.map((highlight, index) => (
+                        <div key={index} className="flex items-center gap-2">
+                          <svg className="w-5 h-5 text-primary" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M5 13l4 4L19 7" />
+                          </svg>
+                          <span>{highlight}</span>
+                        </div>
+                      ))}
+                    </div>
+                  </div>
+                )}
+              </div>
+            </div>
+
+            {/* Fixed Contact Button */}
+            <div className="p-4 border-t bg-white">
+              <button 
+                onClick={() => handleContactAgent(selectedProperty)}
+                className="w-full bg-primary hover:bg-primary/90 text-white font-medium py-3 rounded-lg transition-colors duration-200"
+              >
+                Contact Agent
+              </button>
             </div>
           </div>
         </div>
