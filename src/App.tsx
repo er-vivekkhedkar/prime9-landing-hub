@@ -4,10 +4,12 @@ import About from "./pages/About";
 import Contact from "./pages/Contact";
 import Properties from "./pages/Properties";
 import NotFound from "./pages/NotFound";
-import { Toaster } from 'react-hot-toast';
+import { Toaster } from "@/components/ui/toaster";
+import ContactPopup from './components/ContactPopup';
 
 const App = () => (
   <>
+    <ContactPopup />
     <Toaster />
     <BrowserRouter>
       <Routes>

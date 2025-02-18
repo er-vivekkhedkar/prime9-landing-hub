@@ -1,9 +1,10 @@
 import { useState } from "react";
-import { MapPin, Phone, Clock, Mail } from "lucide-react";
-import toast from 'react-hot-toast';
+import { MapPin, Phone, Clock, Mail, Check } from "lucide-react";
+import { useToast } from "@/components/ui/use-toast";
 
 const ContactSection = () => {
   const [isSubmitting, setIsSubmitting] = useState(false);
+  const { toast } = useToast();
 
   const onSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
@@ -21,42 +22,37 @@ const ContactSection = () => {
       const data = await response.json();
 
       if (data.success) {
-        toast.success('Message sent successfully!', {
+        toast({
+          title: "Success!",
+          description: (
+            <div className="flex items-center gap-2">
+              <div className="bg-green-600 rounded-full p-1">
+                <Check className="h-4 w-4 text-white" />
+              </div>
+              <span>Your message has been sent successfully.</span>
+            </div>
+          ),
+          className: "bg-green-50 border-green-200 text-green-800",
           duration: 4000,
-          position: 'top-center',
-          style: {
-            background: '#10B981',
-            color: '#fff',
-            padding: '16px',
-          },
-          icon: '✉️',
         });
         // Reset the form
         (event.target as HTMLFormElement).reset();
       } else {
         console.log("Error", data);
-        toast.error(data.message || 'Something went wrong!', {
+        toast({
+          variant: "destructive",
+          title: "Error",
+          description: data.message || "Something went wrong!",
           duration: 4000,
-          position: 'top-center',
-          style: {
-            background: '#EF4444',
-            color: '#fff',
-            padding: '16px',
-          },
-          icon: '❌',
         });
       }
     } catch (error) {
       console.error("Error:", error);
-      toast.error('Failed to send message. Please try again.', {
+      toast({
+        variant: "destructive",
+        title: "Error",
+        description: "Failed to send message. Please try again.",
         duration: 4000,
-        position: 'top-center',
-        style: {
-          background: '#EF4444',
-          color: '#fff',
-          padding: '16px',
-        },
-        icon: '❌',
       });
     } finally {
       setIsSubmitting(false);
@@ -142,6 +138,23 @@ const ContactSection = () => {
                     id="name"
                     required
                     placeholder="Your name"
+                    className="w-full px-3 sm:px-4 py-2.5 sm:py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-primary focus:border-transparent text-sm sm:text-base"
+                  />
+                </div>
+                <div>
+                  <label
+                    htmlFor="phone"
+                    className="block text-sm font-medium text-gray-700 mb-1 sm:mb-2"
+                  >
+                    Phone Number
+                  </label>
+                  <input
+                    type="tel"
+                    name="phone"
+                    id="phone"
+                    required
+                    pattern="[0-9]{10}"
+                    placeholder="Your phone number"
                     className="w-full px-3 sm:px-4 py-2.5 sm:py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-primary focus:border-transparent text-sm sm:text-base"
                   />
                 </div>
