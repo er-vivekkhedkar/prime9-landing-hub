@@ -1,16 +1,60 @@
-
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { Menu, X, ChevronDown, Phone } from "lucide-react";
-import { Link } from "react-router-dom";
+import { Link, useLocation, useNavigate } from "react-router-dom";
 
 const Navbar = () => {
   const [isOpen, setIsOpen] = useState(false);
   const [isPropertiesOpen, setIsPropertiesOpen] = useState(false);
+  const location = useLocation();
+  const navigate = useNavigate();
+
+  const handleScrollNavigation = (elementId?: string) => {
+    if (location.pathname !== '/') {
+      navigate('/');
+      // Wait for navigation to complete before scrolling
+      setTimeout(() => {
+        if (elementId) {
+          document.getElementById(elementId)?.scrollIntoView({ behavior: 'smooth' });
+        } else {
+          window.scrollTo({ top: 0, behavior: 'smooth' });
+        }
+      }, 100);
+    } else {
+      if (elementId) {
+        document.getElementById(elementId)?.scrollIntoView({ behavior: 'smooth' });
+      } else {
+        window.scrollTo({ top: 0, behavior: 'smooth' });
+      }
+    }
+  };
+
+  const handlePropertiesClick = (path: string) => {
+    setIsOpen(false); // Close mobile menu
+    setIsPropertiesOpen(false); // Close properties dropdown
+    navigate(path);
+    // Scroll to top after navigation
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+  };
 
   const navItems = [
-    { name: "Home", path: "/" },
-    { name: "About", path: "/about" },
-    { name: "Contact", path: "/contact" },
+    { 
+      name: "Home", 
+      path: "/", 
+      isScroll: true,
+      onClick: () => handleScrollNavigation()
+    },
+    { 
+      name: "About", 
+      path: "about", 
+      isScroll: true,
+      onClick: () => handleScrollNavigation('about')
+    },
+    { 
+      name: "Contact", 
+      path: "contact", 
+      isScroll: true,
+      onClick: () => handleScrollNavigation('contact')
+    },
   ];
 
   const toggleMenu = () => setIsOpen(!isOpen);
@@ -27,13 +71,23 @@ const Navbar = () => {
           {/* Desktop Navigation */}
           <div className="hidden md:flex items-center space-x-8">
             {navItems.map((item) => (
-              <Link
-                key={item.name}
-                to={item.path}
-                className="text-gray-700 hover:text-primary transition-colors duration-200"
-              >
-                {item.name}
-              </Link>
+              item.isScroll ? (
+                <button
+                  key={item.name}
+                  onClick={item.onClick}
+                  className="text-gray-700 hover:text-primary transition-colors duration-200"
+                >
+                  {item.name}
+                </button>
+              ) : (
+                <Link
+                  key={item.name}
+                  to={item.path}
+                  className="text-gray-700 hover:text-primary transition-colors duration-200"
+                >
+                  {item.name}
+                </Link>
+              )
             ))}
             <div className="relative group">
               <button
@@ -46,18 +100,21 @@ const Navbar = () => {
               <div className="absolute top-full right-0 w-48 bg-white shadow-lg rounded-md overflow-hidden opacity-0 group-hover:opacity-100 transition-opacity duration-200">
                 <Link
                   to="/properties/residential"
+                  onClick={() => handlePropertiesClick('/properties/residential')}
                   className="block px-4 py-2 text-gray-700 hover:bg-primary hover:text-white transition-colors duration-200"
                 >
                   Residential
                 </Link>
                 <Link
                   to="/properties/commercial"
+                  onClick={() => handlePropertiesClick('/properties/commercial')}
                   className="block px-4 py-2 text-gray-700 hover:bg-primary hover:text-white transition-colors duration-200"
                 >
                   Commercial
                 </Link>
                 <Link
                   to="/properties/land"
+                  onClick={() => handlePropertiesClick('/properties/land')}
                   className="block px-4 py-2 text-gray-700 hover:bg-primary hover:text-white transition-colors duration-200"
                 >
                   Land
@@ -69,7 +126,7 @@ const Navbar = () => {
           {/* Mobile Menu Button */}
           <button
             onClick={toggleMenu}
-            className="md:hidden text-gray-700 hover:text-primary transition-colors duration-200"
+            className="md:hidden text-primary hover:text-primary/80 transition-colors duration-200"
           >
             {isOpen ? <X className="h-6 w-6" /> : <Menu className="h-6 w-6" />}
           </button>
@@ -84,14 +141,27 @@ const Navbar = () => {
       >
         <div className="flex flex-col py-4">
           {navItems.map((item) => (
-            <Link
-              key={item.name}
-              to={item.path}
-              className="px-6 py-3 text-gray-700 hover:bg-primary hover:text-white transition-colors duration-200"
-              onClick={toggleMenu}
-            >
-              {item.name}
-            </Link>
+            item.isScroll ? (
+              <button
+                key={item.name}
+                onClick={() => {
+                  item.onClick?.();
+                  toggleMenu();
+                }}
+                className="px-6 py-3 text-left text-gray-700 hover:bg-primary hover:text-white transition-colors duration-200"
+              >
+                {item.name}
+              </button>
+            ) : (
+              <Link
+                key={item.name}
+                to={item.path}
+                className="px-6 py-3 text-gray-700 hover:bg-primary hover:text-white transition-colors duration-200"
+                onClick={toggleMenu}
+              >
+                {item.name}
+              </Link>
+            )
           ))}
           <button
             onClick={toggleProperties}
@@ -104,34 +174,44 @@ const Navbar = () => {
             <div className="bg-gray-50">
               <Link
                 to="/properties/residential"
+                onClick={() => handlePropertiesClick('/properties/residential')}
                 className="block px-8 py-3 text-gray-700 hover:bg-primary hover:text-white transition-colors duration-200"
-                onClick={toggleMenu}
               >
                 Residential
               </Link>
               <Link
                 to="/properties/commercial"
+                onClick={() => handlePropertiesClick('/properties/commercial')}
                 className="block px-8 py-3 text-gray-700 hover:bg-primary hover:text-white transition-colors duration-200"
-                onClick={toggleMenu}
               >
                 Commercial
               </Link>
               <Link
                 to="/properties/land"
+                onClick={() => handlePropertiesClick('/properties/land')}
                 className="block px-8 py-3 text-gray-700 hover:bg-primary hover:text-white transition-colors duration-200"
-                onClick={toggleMenu}
               >
                 Land
               </Link>
             </div>
           )}
-          <a 
-            href="tel:+919876543210" 
-            className="px-6 py-3 text-primary font-medium flex items-center"
-          >
-            <Phone className="h-5 w-5 mr-2" />
-            +91 98765 43210
-          </a>
+          <div className="border-t border-gray-200 mt-2 pt-2">
+            <h3 className="px-6 py-2 text-sm font-medium text-gray-500">Contact Us</h3>
+            <a 
+              href="tel:+917666248250" 
+              className="px-6 py-3 text-primary hover:text-primary/80 font-medium flex items-center transition-colors duration-200"
+            >
+              <Phone className="h-5 w-5 mr-2" />
+              +91 7666248250
+            </a>
+            <a 
+              href="tel:+918380859909" 
+              className="px-6 py-3 text-primary hover:text-primary/80 font-medium flex items-center transition-colors duration-200"
+            >
+              <Phone className="h-5 w-5 mr-2" />
+              +91 8380859909
+            </a>
+          </div>
         </div>
       </div>
     </nav>

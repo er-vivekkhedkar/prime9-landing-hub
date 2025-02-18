@@ -1,6 +1,4 @@
-
-import { useState } from "react";
-import { ArrowLeft, ArrowRight } from "lucide-react";
+import { useState, useEffect, useRef, TouchEvent } from "react";
 
 const projects = [
   {
@@ -35,38 +33,105 @@ const projects = [
 
 const ProjectSlider = () => {
   const [currentIndex, setCurrentIndex] = useState(0);
+  const [isTransitioning, setIsTransitioning] = useState(false);
+  const [touchStart, setTouchStart] = useState<number | null>(null);
+  const [touchEnd, setTouchEnd] = useState<number | null>(null);
+  const autoPlayRef = useRef<NodeJS.Timeout | null>(null);
+
+  // Required minimum swipe distance in pixels
+  const minSwipeDistance = 50;
 
   const nextSlide = () => {
+    if (isTransitioning) return;
+    setIsTransitioning(true);
     setCurrentIndex((prev) => (prev + 1) % projects.length);
   };
 
   const prevSlide = () => {
+    if (isTransitioning) return;
+    setIsTransitioning(true);
     setCurrentIndex((prev) => (prev - 1 + projects.length) % projects.length);
   };
 
+  const onTouchStart = (e: TouchEvent) => {
+    setTouchEnd(null);
+    setTouchStart(e.targetTouches[0].clientX);
+  };
+
+  const onTouchMove = (e: TouchEvent) => {
+    setTouchEnd(e.targetTouches[0].clientX);
+  };
+
+  const onTouchEnd = () => {
+    if (!touchStart || !touchEnd) return;
+    
+    const distance = touchStart - touchEnd;
+    const isLeftSwipe = distance > minSwipeDistance;
+    const isRightSwipe = distance < -minSwipeDistance;
+
+    if (isLeftSwipe) {
+      nextSlide();
+    } else if (isRightSwipe) {
+      prevSlide();
+    }
+  };
+
+  // Auto-play functionality with 15 second interval
+  useEffect(() => {
+    const startAutoPlay = () => {
+      autoPlayRef.current = setInterval(() => {
+        nextSlide();
+      }, 15000); // Change slide every 15 seconds
+    };
+
+    const stopAutoPlay = () => {
+      if (autoPlayRef.current) {
+        clearInterval(autoPlayRef.current);
+        autoPlayRef.current = null;
+      }
+    };
+
+    startAutoPlay();
+
+    // Cleanup on component unmount
+    return () => stopAutoPlay();
+  }, []);
+
+  // Reset transition state
+  useEffect(() => {
+    const timer = setTimeout(() => {
+      setIsTransitioning(false);
+    }, 800); // Slightly longer transition duration for smoother animation
+
+    return () => clearTimeout(timer);
+  }, [currentIndex]);
+
   return (
-    <section className="py-20 bg-white">
+    <section className="py-12 sm:py-20 bg-white">
       <div className="container mx-auto px-4">
-        <div className="text-center mb-12">
-          <span className="inline-block px-4 py-1 bg-primary text-white text-sm font-medium rounded-full mb-4">
+        <div className="text-center mb-8 sm:mb-12">
+          <span className="inline-block px-3 py-1 bg-primary text-white text-xs sm:text-sm font-medium rounded-full mb-3 sm:mb-4">
             Our Projects
           </span>
-          <h2 className="text-3xl md:text-4xl font-bold text-gray-900 mb-4">
+          <h2 className="text-2xl sm:text-4xl font-bold text-gray-900 mb-2 sm:mb-4">
             Completed Projects
           </h2>
-          <p className="text-gray-600 max-w-2xl mx-auto">
-            Discover our portfolio of successful projects across Pune, setting new standards in luxury and comfort
+          <p className="text-sm sm:text-base text-gray-600 max-w-2xl mx-auto px-2">
+            Discover our portfolio of successful projects across Pune
           </p>
         </div>
         <div className="relative max-w-6xl mx-auto">
-          <div className="overflow-hidden rounded-xl">
+          <div className="overflow-hidden rounded-lg sm:rounded-xl">
             <div
-              className="flex transition-transform duration-500 ease-out"
+              className="flex transition-transform duration-800 ease-in-out"
               style={{
                 transform: `translateX(-${currentIndex * 100}%)`,
               }}
+              onTouchStart={onTouchStart}
+              onTouchMove={onTouchMove}
+              onTouchEnd={onTouchEnd}
             >
-              {projects.map((project) => (
+              {projects.map((project, index) => (
                 <div
                   key={project.id}
                   className="w-full flex-shrink-0 relative"
@@ -74,47 +139,51 @@ const ProjectSlider = () => {
                   <img
                     src={project.image}
                     alt={project.title}
-                    className="w-full h-[400px] md:h-[500px] object-cover"
+                    className="w-full h-[350px] sm:h-[400px] md:h-[500px] object-cover"
+                    loading={index === 0 ? "eager" : "lazy"}
                   />
-                  <div className="absolute bottom-0 left-0 right-0 bg-gradient-to-t from-black/90 via-black/50 to-transparent p-6 md:p-8">
-                    <div className="max-w-3xl mx-auto text-center">
-                      <h3 className="text-2xl md:text-3xl font-bold text-white mb-2 md:mb-3">
-                        {project.title}
-                      </h3>
-                      <p className="text-white/90 text-base md:text-lg mb-2">
-                        {project.description}
-                      </p>
-                      <span className="inline-block bg-primary/90 text-white px-4 py-2 rounded-full text-sm font-medium">
-                        {project.details}
-                      </span>
+                  <div className="absolute inset-0 flex flex-col justify-end bg-gradient-to-t from-black/90 via-black/50 to-transparent">
+                    <div className="p-4 sm:p-6 md:p-8">
+                      <div className="max-w-3xl mx-auto">
+                        <h3 className="text-xl sm:text-2xl md:text-3xl font-bold text-white mb-2 sm:mb-3">
+                          {project.title}
+                        </h3>
+                        <p className="text-white/90 text-sm sm:text-base mb-3 sm:mb-4 leading-relaxed">
+                          {project.description}
+                        </p>
+                        <span className="inline-block bg-primary/90 text-white px-4 py-2 rounded-full text-xs sm:text-sm font-medium">
+                          {project.details}
+                        </span>
+                      </div>
                     </div>
                   </div>
                 </div>
               ))}
             </div>
           </div>
-          <button
-            onClick={prevSlide}
-            className="absolute left-4 top-1/2 -translate-y-1/2 bg-white/80 hover:bg-white p-3 rounded-full shadow-lg transition-all duration-200 group"
-          >
-            <ArrowLeft className="h-6 w-6 text-gray-800 group-hover:scale-110 transition-transform" />
-          </button>
-          <button
-            onClick={nextSlide}
-            className="absolute right-4 top-1/2 -translate-y-1/2 bg-white/80 hover:bg-white p-3 rounded-full shadow-lg transition-all duration-200 group"
-          >
-            <ArrowRight className="h-6 w-6 text-gray-800 group-hover:scale-110 transition-transform" />
-          </button>
-          <div className="absolute bottom-4 left-0 right-0 flex justify-center gap-2">
-            {projects.map((_, index) => (
-              <button
-                key={index}
-                onClick={() => setCurrentIndex(index)}
-                className={`h-2 rounded-full transition-all duration-300 ${
-                  currentIndex === index ? "w-8 bg-primary" : "w-2 bg-white/60"
-                }`}
-              />
-            ))}
+          <div className="absolute -bottom-6 left-0 right-0">
+            <div className="flex justify-center items-center gap-2">
+              {projects.map((_, index) => (
+                <button
+                  key={index}
+                  onClick={() => {
+                    if (!isTransitioning) {
+                      setIsTransitioning(true);
+                      setCurrentIndex(index);
+                    }
+                  }}
+                  disabled={isTransitioning}
+                  className={`
+                    w-2 h-2 rounded-full transition-all duration-300
+                    ${currentIndex === index 
+                      ? "bg-primary w-6" 
+                      : "bg-gray-300 hover:bg-gray-400"
+                    }
+                  `}
+                  aria-label={`Go to slide ${index + 1}`}
+                />
+              ))}
+            </div>
           </div>
         </div>
       </div>
