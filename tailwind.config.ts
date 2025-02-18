@@ -1,4 +1,3 @@
-
 import type { Config } from "tailwindcss";
 
 export default {
@@ -26,7 +25,7 @@ export default {
         background: "hsl(var(--background))",
         foreground: "hsl(var(--foreground))",
         primary: {
-          DEFAULT: "#FF9966",
+          DEFAULT: "#f26b2b",
           foreground: "#ffffff",
         },
         secondary: {
@@ -53,6 +52,7 @@ export default {
           DEFAULT: "hsl(var(--card))",
           foreground: "hsl(var(--card-foreground))",
         },
+        'logo-orange': 'hsl(var(--logo-orange))'
       },
       keyframes: {
         "slide-in": {
