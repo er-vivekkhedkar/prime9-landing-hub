@@ -12,7 +12,7 @@ const Footer = () => {
             />
             <p className="text-gray-400">
               Your trusted partner in real estate, providing exceptional service and
-              expertise since 2008.
+              expertise since 2008. Located in the heart of Pune, serving all your real estate needs.
             </p>
           </div>
           <div>
@@ -57,6 +57,14 @@ const Footer = () => {
             <ul className="space-y-2">
               <li>
                 <a
+                  href="/properties/residential"
+                  className="text-gray-400 hover:text-white transition-colors duration-200"
+                >
+                  Residential
+                </a>
+              </li>
+              <li>
+                <a
                   href="/properties/commercial"
                   className="text-gray-400 hover:text-white transition-colors duration-200"
                 >
@@ -76,9 +84,12 @@ const Footer = () => {
           <div>
             <h3 className="text-lg font-bold mb-4">Contact Info</h3>
             <ul className="space-y-2 text-gray-400">
-              <li>123 Business Avenue</li>
-              <li>Los Angeles, CA 90012</li>
-              <li>Phone: (555) 123-4567</li>
+              <li>Downtown, City Vista</li>
+              <li>Fountain Road, Rakshak Nagar</li>
+              <li>Kharadi, Pune 411014</li>
+              <li>Maharashtra, India</li>
+              <li className="pt-2">Open 24/7</li>
+              <li>Phone: +91 (020) 1234-5678</li>
               <li>Email: info@prime9realty.com</li>
             </ul>
           </div>
