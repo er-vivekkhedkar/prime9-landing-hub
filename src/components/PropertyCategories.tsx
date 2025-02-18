@@ -1,4 +1,4 @@
-import { Link, useNavigate } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import { ArrowRight } from "lucide-react";
 import { motion } from "framer-motion";
 import { fadeIn, staggerContainer, scaleIn } from "./shared/animations";
@@ -35,9 +35,10 @@ const PropertyCategories = () => {
 
   const handleNavigation = (path: string) => {
     navigate(path);
+    // Instant scroll to top without animation
     window.scrollTo({
       top: 0,
-      behavior: "smooth"
+      behavior: "instant"
     });
   };
 
@@ -63,15 +64,16 @@ const PropertyCategories = () => {
         </motion.div>
 
         <motion.div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
-          {categories.map((category, index) => (
+          {categories.map((category) => (
             <motion.div
               key={category.title}
               variants={scaleIn}
               whileHover={{ scale: 1.02 }}
-              className="group relative bg-white rounded-2xl shadow-md"
+              className="group relative bg-white rounded-2xl shadow-md cursor-pointer"
+              onClick={() => handleNavigation(category.path)}
             >
               {/* Image Container */}
-              <div className="aspect-[4/3] overflow-hidden">
+              <div className="aspect-[4/3] overflow-hidden rounded-t-2xl">
                 <img
                   src={category.image}
                   alt={category.title}
@@ -80,39 +82,32 @@ const PropertyCategories = () => {
               </div>
 
               {/* Content Container */}
-              <div className="absolute inset-0 flex flex-col justify-end bg-gradient-to-t from-black/90 via-black/50 to-transparent">
+              <div className="absolute inset-0 flex flex-col justify-end bg-gradient-to-t from-black/90 via-black/50 to-transparent rounded-2xl">
                 <div className="p-6 transform translate-y-4 group-hover:translate-y-0 transition-transform duration-300">
-                  {/* Category Title */}
                   <h3 className="text-xl sm:text-2xl font-bold text-white mb-2">
                     {category.title}
                   </h3>
                   
-                  {/* Description */}
                   <p className="text-white/90 text-sm mb-3 transform opacity-0 group-hover:opacity-100 transition-opacity duration-300">
                     {category.description}
                   </p>
                   
-                  {/* Stats Badge */}
                   <span className="inline-flex items-center bg-white/10 backdrop-blur-sm text-white text-xs px-3 py-1.5 rounded-full mb-4">
                     {category.stats}
                   </span>
 
-                  {/* Category-specific Button */}
                   <button
                     onClick={(e) => {
                       e.stopPropagation();
                       handleNavigation(category.path);
                     }}
-                    className="inline-flex items-center justify-center w-full px-4 py-2.5 bg-white text-primary hover:bg-primary hover:text-white font-medium rounded-lg transition-colors duration-300 text-sm group-hover:bg-primary group-hover:text-white"
+                    className="inline-flex items-center justify-center w-full px-4 py-2.5 bg-white text-primary hover:bg-primary hover:text-white font-medium rounded-lg transition-colors duration-300 text-sm"
                   >
                     {category.buttonText}
                     <ArrowRight className="w-4 h-4 ml-2 transition-transform duration-300 group-hover:translate-x-1" />
                   </button>
                 </div>
               </div>
-
-              {/* Hover Overlay */}
-              <div className="absolute inset-0 bg-primary/10 opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
             </motion.div>
           ))}
         </motion.div>
