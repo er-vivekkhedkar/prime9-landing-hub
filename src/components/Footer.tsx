@@ -47,7 +47,7 @@ const Footer = () => {
           <div className="text-center sm:text-left">
             <div className="flex justify-center sm:justify-start">
               <img
-                src="/lovable-uploads/19fa9b68-7bb1-4de1-b440-d1e0ab5af13e.png"
+                src="/lovable-uploads/logo.png"
                 alt="Prime9 Realty"
                 className="h-20 w-20 sm:h-16 sm:w-16 rounded-full bg-white p-2 mb-4 object-contain"
               />

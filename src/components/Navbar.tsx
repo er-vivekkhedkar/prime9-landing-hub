@@ -65,7 +65,7 @@ const Navbar = () => {
       <div className="container mx-auto px-4">
         <div className="flex justify-between items-center h-16">
           <Link to="/" className="flex items-center">
-            <img src="/lovable-uploads/19fa9b68-7bb1-4de1-b440-d1e0ab5af13e.png" alt="Prime9 Realty" className="h-12" />
+            <img src="/lovable-uploads/logo.png" alt="Prime9 Realty" className="h-12" />
           </Link>
 
           {/* Desktop Navigation */}
