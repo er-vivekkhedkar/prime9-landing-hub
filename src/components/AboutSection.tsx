@@ -20,7 +20,7 @@ const AboutSection = () => {
             <div className="grid grid-cols-2 gap-6 pt-4">
               <div>
                 <h3 className="text-4xl font-bold text-primary mb-2">21+</h3>
-                <p className="text-gray-600">Properties Sold</p>
+                <p className="text-gray-600"> Properties Sold </p>
               </div>
               <div>
                 <h3 className="text-4xl font-bold text-primary mb-2">99%</h3>
